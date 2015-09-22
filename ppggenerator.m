@@ -5,13 +5,13 @@ DC=15;
 AC=1;
 DN=1;
 fluctuation=1;
-samplingrate=600;
-heartrate=100;
-time=20;
+samplingrate=60;
+heartrate=60;
+time=10;
 
 t=0:1/samplingrate:time;
-a=4*sin(t*2*pi)+4;
-b=sin(t*2*pi+pi*1.4)*4-3.5;
+a=4*sin(t*2*pi*heartrate/60)+4;
+b=sin(t*2*pi*heartrate/60+pi*1.4)*4-3.5;
 
 
 for i=1:length(a)
