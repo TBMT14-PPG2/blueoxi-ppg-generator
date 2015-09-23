@@ -36,8 +36,11 @@ c=c+noise*rand(1,length(c))/2;
 c=c+DC;
 %--------Add fluctuation
 
-F=0.05*sin(t/2)+1;
-c=fluctuation*c.*F;
+if fluctuation ~= 0
+    F=0.05*sin(t/2)+1;
+    c=fluctuation*c.*F;
+end
 
 Generated_PPG_signal=c;     %Final generated PPG signal
+
 plot(t,c)
