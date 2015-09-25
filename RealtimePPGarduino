@@ -1,0 +1,56 @@
+#include<math.h>  
+#include<stdio.h>
+#include<stdlib.h>
+
+
+    #define samplingrate 60
+    #define heartrate 60
+    int noise=1;
+    int DC=15;
+    int AC=1;
+    int DN=1; //Dicrotic notch
+    int fluctuation=1;
+    float wave1;
+    float wave2;
+    float wave3;
+    float wave4;
+    unsigned int i;
+    float t;
+    float pi=3.14159;
+    float randomnr;
+
+void setup()
+{
+Serial.begin(9600);       // set up Serial library at 9600 bps
+ i=0;
+}
+
+void loop() {
+//i=i+1;
+t=(float) i;
+t=t*heartrate/(60*samplingrate);
+   
+        wave1=4*sin(t*2*pi)+4;
+        if  ( wave1<0 )
+        {
+            wave1=0;
+        }
+
+        wave2=4*sin(t*2*pi+pi*1.4)-3.5;
+         if  ( wave2<0 )
+        {
+            wave2=0;
+        }
+       randomnr=(rand() % 10);
+       wave3=AC*(wave1+DN*4*wave2)+noise*randomnr/20+DC;
+   
+
+    if (fluctuation != 0)
+    {
+            wave4=0.05*sin((t*60*heartrate)/(10*samplingrate))+1;
+            wave3=fluctuation*wave4*wave3;
+    }
+    i++;
+Serial.println(wave3);
+ delay(0.000005);
+}
