@@ -1,4 +1,5 @@
 close all
+% creates waveforms c1 and c2
 
 noise=0.1;
 DC=20;
